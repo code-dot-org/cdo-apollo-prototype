@@ -1,5 +1,3 @@
-import StudentAssessment from './schemas/StudentAssessment';
-
 export interface StudentData {
   id: number;
   name: string;

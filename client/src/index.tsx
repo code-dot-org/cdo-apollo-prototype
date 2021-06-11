@@ -1,17 +1,27 @@
+import {
+  ApolloClient,
+  InMemoryCache,
+  NormalizedCacheObject,
+  ApolloProvider
+} from '@apollo/client';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
-import App from './components/App';
-import reportWebVitals from './reportWebVitals';
+import ScriptOverview from './components/ScriptOverview';
+import injectStyles from './styles';
 
+// Initialize ApolloClient
+const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: 'http://localhost:4000/graphql',
+});
+
+injectStyles();
+
+// Pass the ApolloClient instance to the ApolloProvider component
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <ScriptOverview />
+  </ApolloProvider>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

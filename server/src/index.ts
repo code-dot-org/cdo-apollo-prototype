@@ -1,6 +1,7 @@
-import { GraphQLServer } from 'graphql-yoga';
+require('dotenv').config();
 import 'reflect-metadata';
-import { buildSchema } from 'type-graphql';
+import { buildSchema, } from 'type-graphql';
+import {ApolloServer} from 'apollo-server';
 import ScriptResolver from './resolvers/ScriptResolver';
 import SectionResolver from './resolvers/SectionResolver';
 import StudentResolver from './resolvers/StudentResolver';
@@ -17,11 +18,16 @@ async function bootstrap() {
     emitSchemaFile: true,
   });
 
-  const server = new GraphQLServer({
+  // Create GraphQL server
+  const server = new ApolloServer({
     schema,
+    // enable GraphQL Playground
+    playground: true,
   });
 
-  server.start(() => console.log('Server is running on http://localhost:4000'));
+  // Start the server
+  const { url } = await server.listen(4000);
+  console.log(`Server is running, GraphQL Playground available at ${url}`);
 }
 
 bootstrap();

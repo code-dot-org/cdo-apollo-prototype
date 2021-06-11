@@ -16,29 +16,29 @@ type Query {
 }
 
 type Script {
+  assessments: [Assessment!]!
   id: Int!
   name: String!
-  assessments: [Assessment!]!
   students: [Student!]!
 }
 
 type Section {
+  assignedScript: Script!
   id: Int!
   name: String!
   students: [Student!]!
-  assignedScript: Script!
 }
 
 type Student {
+  assessments: [StudentAssessment!]!
   id: Int!
   name: String!
   section: Section!
-  assessments: [StudentAssessment!]!
 }
 
 type StudentAssessment {
-  id: Int!
   assessment: Assessment!
-  student: Student!
+  id: Int!
   isLocked: Boolean!
+  student: Student!
 }

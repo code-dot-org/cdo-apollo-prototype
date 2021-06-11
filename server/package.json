@@ -1,5 +1,5 @@
 {
-  "name": "graphql-typescript",
+  "name": "cdo-apollo-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,13 +11,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "graphql-yoga": "^1.16.7",
+    "apollo-server": "^2.15.0",
+    "class-validator": "^0.13.1",
+    "dotenv": "^10.0.0",
+    "nodemon": "^1.19.4",
     "reflect-metadata": "^0.1.12",
-    "type-graphql": "^0.15.0"
+    "type-graphql": "^1.1.1"
   },
   "devDependencies": {
     "@types/node": "^10.12.18",
     "@types/ws": "^7.4.4",
+    "apollo": "^2.32.5",
+    "apollo-link": "^1.2.3",
+    "apollo-link-http": "^1.5.5",
     "typescript": "^3.2.2"
   }
 }
