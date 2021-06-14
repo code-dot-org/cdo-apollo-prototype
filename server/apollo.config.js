@@ -1,5 +1,5 @@
 module.exports = {
   service: {
-    name: 'cdo-apollo-server',
+    name: 'cdo-apollo-deployed-3t938f',
   },
 };
