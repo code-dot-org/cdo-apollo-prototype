@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { gql, useQuery } from '@apollo/client';
-import * as AssessmentRowTypes from './__generated__/AssessmentRow';
 import * as GetScriptTypes from './__generated__/GetScript';
 
-export const ASSESSMENT_ROW_DATA = gql`
-  fragment AssessmentRow on Assessment {
+import { Header, Button, Loading, AssessmentTile } from '../components';
+
+export const ASSESSMENT_TILE_DATA = gql`
+  fragment AssessmentTile on Assessment {
     __typename
     id
     name
@@ -17,38 +18,34 @@ export const GET_SCRIPT = gql`
     scriptById(id: $id) {
       name
       assessments {
-        ...AssessmentRow
+        ...AssessmentTile
       }
     }
   }
-  ${ASSESSMENT_ROW_DATA}
+  ${ASSESSMENT_TILE_DATA}
 `;
 
 interface ScriptOverviewProps extends RouteComponentProps {}
 
 const ScriptOverview: React.FC<ScriptOverviewProps> = () => {
-  const {
-    data,
-    loading,
-    error
-  } = useQuery<
+  const { data, loading, error } = useQuery<
     GetScriptTypes.GetScript,
     GetScriptTypes.GetScriptVariables
-  >(GET_SCRIPT, {variables: {id: 1}});
+  >(GET_SCRIPT, { variables: { id: 1 } });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>ERROR</p>;
+  if (loading) return <Loading />;
+  if (error) return <p>ERROR: {error.message}</p>;
   if (!data || !data.scriptById) return <p>Not found</p>;
   const script = data.scriptById;
 
   return (
     <Fragment>
-      <h1>{script.name}</h1>
+      <Header title={script.name} />
       {script.assessments?.map((assessment: any) => (
-        <h2 key={assessment.id}>{assessment.name}</h2>
+        <AssessmentTile key={assessment.id} assessment={assessment} />
       ))}
     </Fragment>
   );
-}
+};
 
 export default ScriptOverview;

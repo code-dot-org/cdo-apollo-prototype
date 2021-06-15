@@ -10,7 +10,9 @@ type Assessment {
 }
 
 type Query {
+  assessment(id: Int!): Assessment
   scriptById(id: Int!): Script
+  sectionAssessments(assessmentId: Int!, sectionId: Int!): [StudentAssessment!]
   sectionById(id: Float!): Section
   studentById(id: Float!): Student
 }

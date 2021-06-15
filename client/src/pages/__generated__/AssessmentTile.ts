@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: AssessmentRow
+// GraphQL fragment: AssessmentTile
 // ====================================================
 
-export interface AssessmentRow {
+export interface AssessmentTile {
   __typename: "Assessment";
   id: number;
   name: string;
