@@ -14,7 +14,7 @@ export interface GetStudentAssessments_assessment {
 
 export interface GetStudentAssessments_sectionAssessments_student {
   __typename: "Student";
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -30,6 +30,6 @@ export interface GetStudentAssessments {
 }
 
 export interface GetStudentAssessmentsVariables {
-  sectionId: number;
-  assessmentId: number;
+  sectionId: string;
+  assessmentId: string;
 }

@@ -1,63 +1,72 @@
 export interface StudentData {
-  id: number;
+  id: string;
   name: string;
-  sectionId: number;
+  age?: number;
+  sectionId: string;
 }
 
 export interface SectionData {
-  id: number;
+  id: string;
   name: string;
-  studentIds: number[];
-  assignedScriptId: number;
+  studentIds: string[];
+  assignedScriptId: string;
 }
 
 export interface ScriptData {
-  id: number;
+  id: string;
   name: string;
-  assessmentIds: number[];
+  assessmentIds: string[];
 }
 
 export interface AssessmentData {
-  id: number;
+  id: string;
   name: string;
-  scriptId: number;
+  scriptId: string;
 }
 
 export interface StudentAssessmentData {
-  studentId: number;
-  assessmentId: number;
+  id: string;
+  studentId: string;
+  assessmentId: string;
   isLocked: boolean;
+  isCompleted: boolean;
 }
 
 export const script: ScriptData = {
-  id: 1,
+  id: '1',
   name: 'Demo Script',
-  assessmentIds: [1, 2],
+  assessmentIds: ['1', '2'],
 };
 
 export const assessments: AssessmentData[] = [
-  { id: 1, name: 'Assessment 1', scriptId: 1 },
-  { id: 2, name: 'Assessment 2', scriptId: 1 },
+  { id: '1', name: 'Assessment 1', scriptId: '1' },
+  { id: '2', name: 'Assessment 2', scriptId: '1' },
 ];
 
 export const section: SectionData = {
-  id: 1,
+  id: '1',
   name: 'Demo Section',
-  studentIds: [1, 2, 3, 4],
-  assignedScriptId: 1,
+  studentIds: ['1', '2', '3', '4'],
+  assignedScriptId: '1',
 };
 
 export const students: StudentData[] = [
-  { id: 1, name: 'Paul', sectionId: 1 },
-  { id: 2, name: 'John', sectionId: 1 },
-  { id: 3, name: 'Ringo', sectionId: 1 },
-  { id: 4, name: 'George', sectionId: 1 },
+  { id: '1', name: 'Paul', sectionId: '1' },
+  { id: '2', name: 'John', sectionId: '1' },
+  { id: '3', name: 'Ringo', sectionId: '1' },
+  { id: '4', name: 'George', sectionId: '1' },
 ];
 
 export const studentAssessments: StudentAssessmentData[] = section.studentIds
   .map((studentId) => {
     return script.assessmentIds.map((assessmentId) => {
-      return { studentId, assessmentId, isLocked: true };
+      return {
+        id: `${studentId}_${assessmentId}`,
+        studentId,
+        assessmentId,
+        isLocked: true,
+        isCompleted: false,
+      };
     });
   })
   .reduce((accumulator, value) => accumulator.concat(value), []);

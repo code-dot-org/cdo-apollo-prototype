@@ -14,7 +14,7 @@ export const ASSESSMENT_TILE_DATA = gql`
 `;
 
 export const GET_SCRIPT = gql`
-  query GetScript($id: Int!) {
+  query GetScript($id: ID!) {
     scriptById(id: $id) {
       name
       assessments {
@@ -25,13 +25,15 @@ export const GET_SCRIPT = gql`
   ${ASSESSMENT_TILE_DATA}
 `;
 
-interface ScriptOverviewProps extends RouteComponentProps {}
+interface ScriptOverviewProps extends RouteComponentProps {
+  scriptId?: any;
+}
 
-const ScriptOverview: React.FC<ScriptOverviewProps> = () => {
+const ScriptOverview: React.FC<ScriptOverviewProps> = ({ scriptId }) => {
   const { data, loading, error } = useQuery<
     GetScriptTypes.GetScript,
     GetScriptTypes.GetScriptVariables
-  >(GET_SCRIPT, { variables: { id: 1 } });
+  >(GET_SCRIPT, { variables: { id: scriptId } });
 
   if (loading) return <Loading />;
   if (error) return <p>ERROR: {error.message}</p>;

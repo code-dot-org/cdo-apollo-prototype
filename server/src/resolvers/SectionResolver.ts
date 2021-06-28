@@ -1,21 +1,21 @@
-import { Arg, FieldResolver, Query, Resolver, Root } from 'type-graphql';
+import { Arg, FieldResolver, Query, Resolver, ID } from 'type-graphql';
 import { section, script, students, SectionData } from '../data';
 import Section from '../schemas/Section';
 
 @Resolver((of) => Section)
 export default class {
   @Query((returns) => Section, { nullable: true })
-  sectionById(@Arg('id') id: number): SectionData | undefined {
+  sectionById(@Arg('id', (type) => ID!) id: string): SectionData | undefined {
     return section;
   }
 
   @FieldResolver()
-  students(@Root() sectionData: SectionData) {
+  students() {
     return students;
   }
 
   @FieldResolver()
-  assignedScript(@Root() sectionData: SectionData) {
+  assignedScript() {
     return script;
   }
 }

@@ -9,6 +9,6 @@
 
 export interface AssessmentTile {
   __typename: "Assessment";
-  id: number;
+  id: string;
   name: string;
 }

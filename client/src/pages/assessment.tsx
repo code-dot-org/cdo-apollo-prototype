@@ -17,7 +17,7 @@ export const STUDENT_ASSESSMENT_DATA = gql`
 `;
 
 export const GET_STUDENT_ASSESSMENTS = gql`
-  query GetStudentAssessments($sectionId: Int!, $assessmentId: Int!) {
+  query GetStudentAssessments($sectionId: ID!, $assessmentId: ID!) {
     assessment(id: $assessmentId) {
       name
     }
@@ -37,9 +37,8 @@ const Assessment: React.FC<AssessmentProps> = ({ assessmentId }) => {
     GetStudentAssessmentTypes.GetStudentAssessments,
     GetStudentAssessmentTypes.GetStudentAssessmentsVariables
   >(GET_STUDENT_ASSESSMENTS, {
-    variables: { assessmentId: parseInt(assessmentId), sectionId: 1 },
+    variables: { assessmentId: assessmentId, sectionId: '1' },
   });
-
   if (loading) return <Loading />;
   if (error) return <p>ERROR: {error.message}</p>;
   if (!data) return <p>Not found</p>;

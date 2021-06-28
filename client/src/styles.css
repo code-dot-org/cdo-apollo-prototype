@@ -1,0 +1,16 @@
+.table {
+  display: table;
+  table-layout: fixed;
+}
+.thead {
+  display: table-header-group;
+}
+.tbody {
+  display: table-row-group;
+}
+.tr {
+  display: table-row;
+}
+.td {
+  display: table-cell;
+}

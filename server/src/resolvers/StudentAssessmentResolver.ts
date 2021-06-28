@@ -1,4 +1,12 @@
-import { Arg, Query, FieldResolver, Resolver, Root, Int } from 'type-graphql';
+import {
+  Arg,
+  Query,
+  Mutation,
+  FieldResolver,
+  Resolver,
+  Root,
+  ID,
+} from 'type-graphql';
 import {
   assessments,
   students,
@@ -12,8 +20,8 @@ import StudentAssessment from '../schemas/StudentAssessment';
 export default class {
   @Query((returns) => [StudentAssessment], { nullable: true })
   sectionAssessments(
-    @Arg('sectionId', (type) => Int!) sectionId: number,
-    @Arg('assessmentId', (type) => Int!) assessmentId: number
+    @Arg('sectionId', (type) => ID!) sectionId: string,
+    @Arg('assessmentId', (type) => ID!) assessmentId: string
   ): StudentAssessmentData[] {
     return section.studentIds.reduce((assessments, studentId) => {
       return assessments.concat(
@@ -22,6 +30,39 @@ export default class {
         )
       );
     }, [] as StudentAssessmentData[]);
+  }
+
+  @Mutation((returns) => StudentAssessment)
+  markStudentAsssessmentCompleted(
+    @Arg('id', (type) => ID!) id: string
+  ): StudentAssessmentData {
+    const studentAssessment = studentAssessments.find((sa) => {
+      return sa.id === id;
+    });
+    if (!studentAssessment) {
+      throw new Error(`Couldn't find the student assessment with id ${id}`);
+    }
+    if (studentAssessment.isCompleted === true) {
+      throw new Error(`Student assessment with id ${id} is already completed`);
+    }
+    studentAssessment.isCompleted = true;
+    studentAssessment.isLocked = true;
+    return studentAssessment;
+  }
+
+  @Mutation((returns) => StudentAssessment)
+  setStudentAssessmentLocked(
+    @Arg('id', (type) => ID!) id: string,
+    @Arg('isLocked') isLocked: boolean
+  ): StudentAssessmentData {
+    const studentAssessment = studentAssessments.find((sa) => {
+      return sa.id === id;
+    });
+    if (!studentAssessment) {
+      throw new Error(`Couldn't find the student assessment with id ${id}`);
+    }
+    studentAssessment.isLocked = isLocked;
+    return studentAssessment;
   }
 
   @FieldResolver()

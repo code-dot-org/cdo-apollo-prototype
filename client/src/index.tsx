@@ -8,11 +8,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Pages from './pages';
 import injectStyles from './styles';
+import './styles.css';
 
 // Initialize ApolloClient
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: 'http://localhost:4000/script/1',
+  uri: 'http://localhost:4000/',
 });
 
 injectStyles();

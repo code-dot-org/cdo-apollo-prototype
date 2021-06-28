@@ -4,17 +4,12 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: StudentAssessmentData
+// GraphQL fragment: StudentFragment
 // ====================================================
 
-export interface StudentAssessmentData_student {
+export interface StudentFragment {
   __typename: "Student";
   id: string;
   name: string;
-}
-
-export interface StudentAssessmentData {
-  __typename: "StudentAssessment";
-  student: StudentAssessmentData_student;
-  isLocked: boolean;
+  age: number;
 }

@@ -9,7 +9,7 @@
 
 export interface GetScript_scriptById_assessments {
   __typename: "Assessment";
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -24,5 +24,5 @@ export interface GetScript {
 }
 
 export interface GetScriptVariables {
-  id: number;
+  id: string;
 }

@@ -50,4 +50,7 @@ export default () =>
       textTransform: 'uppercase',
       letterSpacing: 4,
     },
+    ul: {
+      margin: 0,
+    },
   });

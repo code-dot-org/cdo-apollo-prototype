@@ -1,11 +1,11 @@
-import { Field, Int, ObjectType } from 'type-graphql';
+import { Field, ID, ObjectType } from 'type-graphql';
 import Student from './Student';
 import Script from './Script';
 
 @ObjectType()
 export default class Section {
-  @Field((type) => Int)
-  id: number;
+  @Field((type) => ID)
+  id: string;
 
   @Field()
   name: string;

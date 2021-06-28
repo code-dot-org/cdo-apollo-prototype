@@ -4,43 +4,57 @@
 # -----------------------------------------------
 
 type Assessment {
-  id: Int!
+  id: ID!
   name: String!
   script: Script!
 }
 
+type Mutation {
+  markStudentAsssessmentCompleted(id: ID!): StudentAssessment!
+  postStudent(student: StudentInput!): Student!
+  setStudentAssessmentLocked(id: ID!, isLocked: Boolean!): StudentAssessment!
+}
+
 type Query {
-  assessment(id: Int!): Assessment
-  scriptById(id: Int!): Script
-  sectionAssessments(assessmentId: Int!, sectionId: Int!): [StudentAssessment!]
-  sectionById(id: Float!): Section
-  studentById(id: Float!): Student
+  assessment(id: ID!): Assessment
+  scriptById(id: ID!): Script
+  sectionAssessments(assessmentId: ID!, sectionId: ID!): [StudentAssessment!]
+  sectionById(id: ID!): Section
+  studentById(id: ID!): Student
 }
 
 type Script {
   assessments: [Assessment!]!
-  id: Int!
+  id: ID!
   name: String!
   students: [Student!]!
 }
 
 type Section {
   assignedScript: Script!
-  id: Int!
+  id: ID!
   name: String!
   students: [Student!]!
 }
 
 type Student {
+  age: Int
   assessments: [StudentAssessment!]!
-  id: Int!
+  id: ID!
   name: String!
   section: Section!
 }
 
 type StudentAssessment {
   assessment: Assessment!
-  id: Int!
+  id: ID!
+  isCompleted: Boolean!
   isLocked: Boolean!
   student: Student!
+}
+
+input StudentInput {
+  age: Int
+  id: ID
+  name: String!
 }

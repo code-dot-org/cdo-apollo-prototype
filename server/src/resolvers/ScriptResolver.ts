@@ -1,21 +1,21 @@
-import { Arg, FieldResolver, Query, Resolver, Root, Int } from 'type-graphql';
+import { Arg, FieldResolver, Query, Resolver, Root, ID } from 'type-graphql';
 import { script, assessments, students, ScriptData } from '../data';
 import Script from '../schemas/Script';
 
 @Resolver((of) => Script)
 export default class {
   @Query((returns) => Script, { nullable: true })
-  scriptById(@Arg('id', type => Int) id: number): ScriptData | undefined {
+  scriptById(@Arg('id', (type) => ID!) id: string): ScriptData | undefined {
     return script;
   }
 
   @FieldResolver()
-  assessments(@Root() scriptData: ScriptData) {
+  assessments() {
     return assessments;
   }
 
   @FieldResolver()
-  students(@Root() scriptData: ScriptData) {
+  students() {
     return students;
   }
 }
