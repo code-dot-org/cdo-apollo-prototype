@@ -18,6 +18,9 @@ export default class Student {
 
   @Field((type) => [StudentAssessment])
   assessments: StudentAssessment[];
+
+  @Field((type) => Int, { nullable: true })
+  test2?: number;
 }
 
 @InputType()

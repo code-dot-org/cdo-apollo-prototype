@@ -1,4 +1,3 @@
-require('dotenv').config();
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server';

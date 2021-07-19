@@ -1,6 +1,9 @@
 module.exports = {
   client: {
     name: 'CDO Apollo Demo',
-    service: 'cdo-apollo-deployed-3t938f',
+    service: {
+      name: 'cdo-apollo-server',
+      url: 'http://localhost:4000',
+    },
   },
 };

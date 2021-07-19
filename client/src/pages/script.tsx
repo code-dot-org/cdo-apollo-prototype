@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { gql, useQuery } from '@apollo/client';
 import * as GetScriptTypes from './__generated__/GetScript';
 
-import { Header, Button, Loading, AssessmentTile } from '../components';
+import { Header, Loading, AssessmentTile } from '../components';
 
 export const ASSESSMENT_TILE_DATA = gql`
   fragment AssessmentTile on Assessment {
