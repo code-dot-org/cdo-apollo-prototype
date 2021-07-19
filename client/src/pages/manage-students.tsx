@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { gql, useQuery } from '@apollo/client';
 
-import { Loading, Header, StudentAssessment } from '../components';
+import { Loading } from '../components';
 import { RouteComponentProps } from '@reach/router';
 import * as GetSectionTypes from './__generated__/GetSection';
 
